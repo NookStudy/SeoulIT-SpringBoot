@@ -1,0 +1,8 @@
+package admin.controller;
+
+import javax.servlet.http.HttpServlet;
+
+public class AdminMainController  extends HttpServlet{
+	private static final long serialVersionUID = 1L;
+
+}

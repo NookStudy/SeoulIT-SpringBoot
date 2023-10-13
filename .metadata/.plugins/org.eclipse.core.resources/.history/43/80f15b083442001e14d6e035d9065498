@@ -1,0 +1,28 @@
+package gallery.controller;
+
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import gallery.model.GalleryDAO;
+
+public class GallHeartCountCount extends HttpServlet{
+	private static final long serialVersionUID = 1L;
+	
+	@Override
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		req.setCharacterEncoding("utf-8");
+		// no와 id값을 map에 저장
+		Map<String, Object> m = new HashMap<>();
+		m.put("gallno", req.getParameter("no"));
+		
+		GalleryDAO dao = new GalleryDAO();
+		//게시물하트 조회
+		int couunt = dao.countHeart(m);
+	}
+}

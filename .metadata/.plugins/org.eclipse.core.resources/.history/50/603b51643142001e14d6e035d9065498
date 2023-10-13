@@ -1,0 +1,38 @@
+package gallery.controller;
+
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import gallery.model.GalleryDAO;
+
+public class GallHeartController extends HttpServlet{
+	private static final long serialVersionUID = 1L;
+
+	
+	@Override
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		req.setCharacterEncoding("utf-8");
+		// no와 id값을 map에 저장
+		Map<String, Object> m = new HashMap<>();
+		m.put("no", req.getParameter("no"));
+		m.put("id", req.getParameter("id"));
+		
+		GalleryDAO dao = GalleryDAO();
+		// 동일 게시글에 대한 이전 추천 여부 검색
+		int result = dao.recCheck(m);
+		
+		if(result == 0){ // 추천하지 않았다면 추천 추가
+			dao.recUpdate(m);
+		}else{ // 추천을 하였다면 추천 삭제
+			dao.recDelete(m);
+		}
+		return null;
+	
+	}
+}

@@ -1,0 +1,7 @@
+package com.study.springboot.jdbc;
+
+public class MyUserDTO {
+
+	private String id;
+	private String name;
+}

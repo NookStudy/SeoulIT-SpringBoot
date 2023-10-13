@@ -1,0 +1,9 @@
+package members.controller;
+
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+
+@WebServlet("/member/infoedit.do")
+public class MemberinfoCont extends HttpServlet{
+
+}

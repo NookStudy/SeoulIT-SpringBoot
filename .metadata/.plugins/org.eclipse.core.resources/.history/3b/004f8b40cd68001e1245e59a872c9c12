@@ -1,0 +1,22 @@
+server.port=8081
+# JSP
+spring.mvc.view.prefix=/WEB-INF/views/
+spring.mvc.view.suffix=.jsp
+
+# oracle set
+spring.datasource.driver-class-name=oracle.jdbc.OracleDriver
+spring.datasource.url=jdbc:oracle:thin:@localhost:1521/xe
+spring.datasource.username=scott
+spring.datasource.password=TIGER
+
+#mybatis
+mybatis.mapper-locations=classpath:mybatis/mapper/**/**.xml
+
+# 콘솔 창에 출력되는 로깅 메세지를 색으로 구분해서 출력
+spring.output.ansi.enabled=always
+# 로그 메시지가 저장되는 로그 디렉터리
+logging.path=logs
+# logging.level.{패키지 경로}를 통해 로깅 레벨을 결정할 수 있슴
+logging.level.com.tutorial.springboot=DEBUG  
+# 개발하기 때문에 DEBUG를 사용함.
+
