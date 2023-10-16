@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class MyController {
 	@RequestMapping("/")
 	public @ResponseBody String root() throws Exception{
-		return "Security (1)";
+		return "Security (1)_boot 3.1.0";
 	}
 	
 	@RequestMapping("/guest/welcome")

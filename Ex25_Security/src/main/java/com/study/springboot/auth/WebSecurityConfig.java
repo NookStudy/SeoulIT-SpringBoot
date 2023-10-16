@@ -6,8 +6,12 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
-import org.springframework.security.crypto.password.PasswordEncoder;  
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;  
 
 @Configuration	// 설정으로 쓰이는 빈
@@ -34,15 +38,25 @@ public class WebSecurityConfig  {
 		return http.build(); 
     }
  
-    @Autowired
-    // 사용자를 메모리에 저장. 테스트용으로 쓰임
-    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-        auth.inMemoryAuthentication()
-        	.withUser("user").password(passwordEncoder().encode("1234")).roles("USER")
-        	.and()
-        	.withUser("admin").password(passwordEncoder().encode("1234")).roles("ADMIN");
-        	// ROLE_ADMIN 에서 ROLE_는 자동으로 붙는다.
-    }
+   	@Bean
+       // users() 메서드는 빠른 테스트를 위해 등록이 간단한 inMemory 방식의 인증 사용자를 등록
+       protected UserDetailsService users() 
+       {
+           UserDetails user = User.builder()
+           		.username("user")
+           		.password(passwordEncoder().encode("1234"))
+           		.roles("USER")	// ROLE_USER 에서 ROLE_ 자동으로 붙는다.
+           		.build();
+           UserDetails admin = User.builder()
+           		.username("admin")
+           		.password(passwordEncoder().encode("1234"))
+           		.roles("USER", "ADMIN")	
+           		.build();
+           
+           // 메모리에 사용자 정보를 담는다.
+           return new InMemoryUserDetailsManager(user, admin);
+       }
+
     
     // passwordEncoder() 추가   
     // 버전업 되면서 아래와 같이 수정됨.
