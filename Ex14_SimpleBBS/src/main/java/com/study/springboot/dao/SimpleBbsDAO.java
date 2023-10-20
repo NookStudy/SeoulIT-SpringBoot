@@ -59,7 +59,7 @@ public class SimpleBbsDAO implements IsSimpleBbsDAO{
 		 	실행결과로 반환된 행의 갯수. 즉, 입력된 행의 갯수가 변환되게 된다.
 		 */
 		//인파라미터가 있는 쿼리문 작성
-		String query =
+		String query =q
 				"insert into simple_bbs(id,writer,title,content) values(simple_bbs_seq.nextval,?,?,?)";
 		//업데이트 데이터가 한개 또는 여러개 있을 때
 		return template.update(query,writer,title,content);

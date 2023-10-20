@@ -1,8 +1,0 @@
-package mybatis.mapper;
-
-import lombok.Data;
-
-@Data
-public class MyUserDAO {
-
-}
